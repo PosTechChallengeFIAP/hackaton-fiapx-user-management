@@ -1,0 +1,7 @@
+uploads/
+output/
+tempDir/
+target/
+
+.idea/
+.mvn/
