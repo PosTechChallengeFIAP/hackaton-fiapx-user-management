@@ -10,22 +10,10 @@
 	</parent>
 	<groupId>com.fiapx.usermanagement</groupId>
 	<artifactId>user-management</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
+	<packaging>jar</packaging>
 	<name>user-management</name>
 	<description>FIAP X - User Management</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
