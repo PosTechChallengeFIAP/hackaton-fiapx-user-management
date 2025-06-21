@@ -66,4 +66,9 @@ public class AuthController {
 
         return ResponseEntity.ok(MessageResponse.type(EMessageType.SUCCESS).withMessage(jwt));
     }
+
+    @GetMapping("/authenticate")
+    public ResponseEntity<?> checkToken() {
+        return ResponseEntity.ok().build();
+    }
 }
