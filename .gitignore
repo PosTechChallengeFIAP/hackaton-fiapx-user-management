@@ -5,3 +5,7 @@ target/
 
 .idea/
 .mvn/
+devops/terraform/.terraform/
+devops/helm/fiapx-user-management/charts/
+devops/terraform/.terraform.lock.hcl
+devops/terraform/terraform.tfvars

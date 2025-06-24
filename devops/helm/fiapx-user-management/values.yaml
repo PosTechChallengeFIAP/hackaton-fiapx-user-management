@@ -1,0 +1,15 @@
+replicaCount: 2
+
+image:
+  repository: loadinggreg/fiapx-user-management
+  tag: a856829
+  pullPolicy: IfNotPresent
+
+service:
+  port: 80
+  targetPort: 8080
+  nodePort: 30080
+
+mysql:
+  database: springdb
+  user: springuser
