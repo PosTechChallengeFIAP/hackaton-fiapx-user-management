@@ -7,6 +7,7 @@ on:
       - completed
 
 env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   IMAGE_NAME: fiapx-user-management
   DOCKER_REPO: ${{ secrets.DOCKER_HUB_USER }}/fiapx-user-management
   HELM_CHART_PATH: ./devops/helm
