@@ -1,0 +1,38 @@
+name: Deploy Spring Boot App to EKS
+
+on:
+  workflow_run:
+    workflows: ["Docker Image CI/CD"]
+    types:
+      - completed
+
+env:
+  IMAGE_NAME: fiapx-user-management
+  DOCKER_REPO: ${{ secrets.DOCKER_HUB_USER }}/fiapx-user-management
+  HELM_CHART_PATH: ./devops/helm
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name academy-eks-cluster
+
+    - name: Install Helm
+      uses: azure/setup-helm@v3
+
+    - name: Deploy Helm chart
+      run: |
+        helm upgrade --install $IMAGE_NAME $HELM_CHART_PATH --namespace default --create-namespace
