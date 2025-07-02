@@ -2,6 +2,7 @@ package com.fiapx.usermanagement.adapters.driver.controllers;
 
 import com.fiapx.usermanagement.core.application.auth.config.AuthConfig;
 import com.fiapx.usermanagement.core.application.auth.model.UserDetails;
+import com.fiapx.usermanagement.core.application.auth.model.UserInfo;
 import com.fiapx.usermanagement.core.application.auth.service.IUserDetailsService;
 import com.fiapx.usermanagement.core.application.auth.utils.JWTUtil;
 import com.fiapx.usermanagement.core.application.message.EMessageType;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
@@ -69,6 +72,12 @@ public class AuthController {
 
     @GetMapping("/authenticate")
     public ResponseEntity<?> checkToken() {
-        return ResponseEntity.ok().build();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails currentUser = (UserDetails) auth.getPrincipal();
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername(currentUser.getUsername());
+
+        return ResponseEntity.ok(userInfo);
     }
 }
